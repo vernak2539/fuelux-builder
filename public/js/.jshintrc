@@ -46,7 +46,7 @@
     "onecase": false,
     "nonstandard": false,
     "multistr": false,
-    "laxcomma": false,
+    "laxcomma": true,
     "lastsemic": false,
     "iterator": false,
     "funcscope": false,
@@ -60,13 +60,16 @@
     "plusplus": false,
     "sub": false,
     "trailing": false,
-    "indent": 4,
-    "white": true,
+    "indent": false,
+    "white": false,
 
     "maxparams": 5,
     "maxdepth": 3,
     "maxstatements": 25,
     "maxcomplexity": 6,
 
-    "predef": ["define", "requirejs"]
+    "predef": ["define", "requirejs"],
+    "globals": {
+        "define": true
+    }
 }
