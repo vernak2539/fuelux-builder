@@ -1,5 +1,10 @@
 {>"layouts/master" /}
 
 {<body}
-    <h1>{@pre type="content" key="index.greeting"/}</h1>
+    <!--h1>{@pre type="content" key="index.greeting"/}</h1-->
+    <div class="container" id="mainContent"></div>
 {/body}
+
+{<title}
+    {title}
+{/title}
