@@ -15,7 +15,7 @@ requirejs.config({
 		, jquery: 'jquery/jquery'
 		, json2: 'json2/json2'
 		, bootstrap: 'bootstrap/dist/js/bootstrap'
-		, fuelux: 'fuelux/dist/all'
+		, fuelux: 'http://www.fuelcdn.com/fuelux/2.5.0'
 		, moment: 'moment/moment'
 		, marionette: 'backbone.marionette/lib/core/amd/backbone.marionette'
 		, 'backbone.wreqr': 'backbone.wreqr/lib/amd/backbone.wreqr'
@@ -37,7 +37,7 @@ requirejs.config({
 			deps: [ 'jquery' ]
 		},
 		'fuelux': {
-			deps: [ 'bootstrap', 'jquery' ]
+			deps: [ 'jquery' ]
 		}
 	}
 });
