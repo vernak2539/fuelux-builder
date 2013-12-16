@@ -10,7 +10,7 @@ define(function(require) {
 
 	// views
 	var FuelVersionCompositeView = require( 'views/fuel-version-composite-view' );
-	//var FuelControlsView          = require( 'views/fuel-controls-view' );
+	var FuelVersionComponents          = require( 'views/fuel-components-item-view' );
 
 	// templates
 	var customizeLayoutTmpl = require( 'tmpl!templates/customize-layout-tmpl.html' );
@@ -24,6 +24,7 @@ define(function(require) {
 		}
 		, onRender: function() {
 			this.versions.show( new FuelVersionCompositeView({ collection: app.model.get( 'fuel-versions' ) }) );
+			this.controls.show( new FuelVersionComponents() );
 			this.versions.$el.find( '.radio-custom > input[type=radio]' ).radio();
 		}
 	});

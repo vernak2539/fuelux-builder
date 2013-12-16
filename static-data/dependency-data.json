@@ -1,0 +1,30 @@
+{
+	"fuelux": [
+		{
+			"version": "2.0.0",
+			"controls": [
+				{
+					"name": "combobox",
+					"deps": []
+				},
+				{
+					"name": "datagrid",
+					"deps": []
+				},
+				{
+					"name": "pillbox",
+					"deps": []
+				},
+				{
+					"name": "search",
+					"deps": []
+				},
+				{
+					"name": "spinner",
+					"deps": []
+				}
+			],
+			"codebase": "https://github.com/ExactTarget/fuelux/archive/2.0.0.zip"
+		}
+	]
+}
