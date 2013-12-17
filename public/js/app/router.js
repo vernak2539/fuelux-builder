@@ -1,5 +1,5 @@
 define(function(require) {
-	"use strict";
+	'use strict';
 
 	// app itself
 	var app = require( 'app-base/app' );

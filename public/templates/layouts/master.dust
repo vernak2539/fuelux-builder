@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<title>{+title /}</title>
 	<link rel="stylesheet" href="/css/app.css" />
-	<script data-main="js/app/config" src="components/requirejs/require.js"></script>
+	<script data-main="/js/app/config" src="/components/requirejs/require.js"></script>
 	<script>
 		define( 'server-config', {config|s} );
 	</script>

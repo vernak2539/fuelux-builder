@@ -1,5 +1,3 @@
-'use strict';
-
 requirejs.config({
 	baseUrl: '../components'
 	, paths: {
@@ -21,6 +19,9 @@ requirejs.config({
 		, marionette: 'backbone.marionette/lib/core/amd/backbone.marionette'
 		, 'backbone.wreqr': 'backbone.wreqr/lib/amd/backbone.wreqr'
 		, 'backbone.babysitter': 'backbone.babysitter/lib/amd/backbone.babysitter'
+		, tmpl: 'tmpl'
+		, text: 'text'
+		, handlebars: 'handlebars'
 	}
 	, deps: [ 'app-base/router' ]
 	, shim: {

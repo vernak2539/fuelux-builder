@@ -151,5 +151,10 @@
     // Maximum number of statements per function.
     "maxstatements": 25,
     // Maximum cyclomatic complexity.
-    "maxcomplexity": 6
+    "maxcomplexity": 6,
+    "globals": {
+        "define": true,
+        "requirejs": true,
+        "require": true
+    }
 }
