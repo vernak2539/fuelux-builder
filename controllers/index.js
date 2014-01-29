@@ -5,7 +5,9 @@ var _      = require( 'underscore' );
 
 var defaultOptions = {
 	title: 'Fuel UX Builder',
-	ui: JSON.stringify( config.ui )
+	ui: JSON.stringify( config.ui ),
+	index: '{{$index+1}}',
+	stepDesc: '{{step.desc}}'
 };
 
 module.exports = function( server ) {

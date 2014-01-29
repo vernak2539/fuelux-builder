@@ -10,13 +10,8 @@
 </div>
 <div class="row customize">
 	<div class="span3 offset1 steps">
-		<ul>
-			<li class="active">Step 1</li>
-			<li>Step 2</li>
-			<li>Step 3</li>
-			<li>Step 4</li>
-			<li>Step 5</li>
-			<li>Step 6</li>
+		<ul data-ng-controller="stepController">
+			<li data-ng-repeat="step in builderData.steps">Step {{ index }}: {{ stepDesc }}</li>
 		</ul>
 	</div>
 	<div class="span6 options">
