@@ -8,7 +8,7 @@ var port    = 9898;
 var nonTokenServer;
 var indexRouterIndex = 0;
 
-describe( 'app - with token mods', function() {
+describe( 'app', function() {
 	before( function( done ) {
 		nonTokenServer = app.listen( port, function( err ) {
 			if( err ) {
@@ -65,19 +65,6 @@ describe( 'app - with token mods', function() {
 			.set( 'Accept', 'application/json' )
 			.expect( 'Content-Type', /json/ )
 			.expect( 404 )
-			.end( function( err ) {
-				if( err ) {
-					return done( err );
-				} else {
-					done();
-				}
-			});
-	});
-
-	it( 'should throw a 500', function( done ) {
-		request( app )
-			.get( '/throw-err' )
-			.expect( 500 )
 			.end( function( err ) {
 				if( err ) {
 					return done( err );

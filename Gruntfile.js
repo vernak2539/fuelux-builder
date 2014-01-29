@@ -40,18 +40,17 @@ module.exports = function( grunt ) {
 				browsers: ['PhantomJS'],
 				singleRun: true
 			}
-		},
+		},*/
 		mochaTest: { // node tests
 			express: {
 				options: {
 					reporter: 'spec'
 				},
 				src: [
-                    '<%= paths.node %>test/server/simulated-authenticated-test.js',
-					'<%= paths.node %>test/server/unauthenticated-test.js'
+					'<%= paths.node %>test/server/start-test.js'
 				]
 			}
-		},*/
+		},
 		complexity: {
 			client: {
 				src: [
@@ -122,7 +121,7 @@ module.exports = function( grunt ) {
 
 	// Default task.
 	grunt.registerTask( 'default', [ 'env:test', 'tests', 'optimizeJS', 'optimizeCSS', 'imagemin:dist'] );
-	grunt.registerTask( 'tests', [ 'env:test', 'jshint'/*, 'karma', 'mochaTest'*/, 'complexity:client' ] );
+	grunt.registerTask( 'tests', [ 'env:test', 'jshint'/*, 'karma'*/, 'mochaTest', 'complexity:client' ] );
 	grunt.registerTask( 'optimizeJS', [ 'clean:dist', 'requirejs' ] );
 	grunt.registerTask( 'optimizeCSS' , [ 'less:dist', 'clean:distLess' ] );
 };
