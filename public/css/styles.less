@@ -1,17 +1,65 @@
+@import 'helpers.less';
+@import 'colors.less';
 @import (less) "fuelux.css";
 
 .fuelux {
-	.title {
-		font-size: 14px;
-		padding: 0 0 20px 0;
-		color: #999;
 
-		img {
-			vertical-align: text-bottom;
+	.header-container {
+		margin-bottom: 10px;
+
+		.title {
+			font-size: 14px;
+			padding: 0 0 20px 0;
+			color: #999;
+
+			img {
+				vertical-align: text-bottom;
+			}
 		}
 	}
 
-	.radio {
-		margin-left: 10px;
+	.customize {
+		.steps {
+			>ul {
+				list-style: none;
+				width:100%;
+				margin: 3px 0 0 0;
+				padding: 0;
+
+				>li {
+					cursor: pointer;
+					list-style: none;
+					width: 100%;
+					padding: 8px;
+					margin: 0 0 10px;
+					box-sizing: border-box;
+					border: 1px solid darken( @white, 20% );
+					.border-radius( 5px, 5px, 5px, 5px );
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+
+					&:hover, &.active {
+						color: @white;
+						font-weight: bold;
+						background: @stepHover;
+						background: rgba(red(@stepHover), green(@stepHover), blue(@stepHover), 1);
+						border: 1px solid darken( @stepHover, 10% );
+						border-right-width: 2px;
+						border-left-width: 2px;
+					}
+				}
+			}
+		}
+
+		.options {
+			margin-left: 30px;
+
+			>.section-title {
+				margin-top: 0;
+				padding-top: 0;
+			}
+		}
 	}
 }
