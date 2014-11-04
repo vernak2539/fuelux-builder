@@ -4,84 +4,60 @@ var config  = require( 'config' );
 var pkg     = require( './package.json' );
 var http    = require( 'http' );
 var express = require( 'express' );
-var appsec  = require( 'lusca' );
 var app     = express();
 
-// express handlebars setup
-var exphbs    = require( 'express3-handlebars' );
-var hbsConfig = require( './lib/hbs-config' );
-var hbs       = exphbs.create( hbsConfig );
+// express4 specific
+var compression    = require( 'compression' );
+var errorHandler   = require( 'errorhandler' );
+var methodOverride = require( 'method-override' );
+var bodyParser     = require( 'body-parser' );
 
-// getting main controller for routes
-var mainController = require( './controllers/main' );
+// rendering engine
+var ECT         = require( 'ect' );
+var ectRenderer = ECT({
+	watch: true
+	, root: __dirname + '/views'
+	, ext : '.ect'
+});
 
-// adding custom middleweare
+var routes = require( './routes/main' );
+
 var lessCompiler = require( 'express-less-middleware' )();
 
-app.configure( function() {
-	// Webfonts need mime types, too!
-	express.static.mime.define( { 'application/x-font-woff': [ 'woff' ] } );
-	express.static.mime.define( { 'application/x-font-ttf': [ 'ttf' ] } );
-	express.static.mime.define( { 'application/vnd.ms-fontobject': [ 'eot' ] } );
-	express.static.mime.define( { 'font/opentype': [ 'otf' ] } );
-	express.static.mime.define( { 'image/svg+xml': [ 'svg' ] } );
+app.use( compression() );
 
-	// gzipping
-	app.use( express.compress() );
+app.set( 'view engine', 'ect' );
+app.engine( 'ect', ectRenderer.render );
 
-	// setting port correctly
-	app.set( 'port', process.env.PORT || config.port );
+app.set( 'port',  process.env.PORT || config.port );
 
-	// using express3 handlebars for templating
-	app.engine( 'handlebars', hbs.engine );
-	app.set( 'view engine', 'handlebars' );
-	app.set( 'views', __dirname + '/views/' );
+app.disable( 'X-Powered-By' );
 
-	// serving front-facing app from static place
-	// include before any middleware unnecessary for static files
-	app.use( express.static( __dirname + config.ui.publicDir ) );
+// setting up dev specific things
+if( process.env.NODE_ENV === 'dev' ) {
 
-	// allowing express to behave like a RESTful app
-	app.use( express.methodOverride() );
-	app.use( express.cookieParser() );
+	// using less compiler
+	app.use( lessCompiler() );
 
-	app.use( function ( req, res, next ) {
-		app.disable( 'X-Powered-By' );
-		res.setHeader( "X-Powered-By", "ExactTarget" );
-		next();
-	});
+	// error handling dump, only in dev
+	app.use( errorHandler( { dumpException: true, showStack: true } ) );
+}
 
-	// use express session middleware
-	// for multi-instance apps MemoryStore should be replaced
-	// with a cross instance store such as RedisStore
-	app.use( express.session({
-		store: new express.session.MemoryStore()
-		, secret: 'test-build-for-filesSecret!@#$4424'
-		, key: 'test-build-for-files379Key'
-	} ) );
+// bower_components
+app.use( config.ui.bowerBase, express.static( __dirname + config.ui.bowerBase ) );
 
-	// app security configuration
-	app.use( appsec({
-		csrf: true,
-		xframe: 'SAMEORIGIN'
-	}));
-});
+// everything else static if possible
+app.use( express.static( __dirname + config.ui.publicDir ) );
 
-app.configure( 'dev', function() {
-	console.log( 'Running '+ pkg.name +' in dev mode' );
-	app.use( lessCompiler );
-	app.use( express.errorHandler( { dumpException: true, showStack: true } ) );
-});
+app.use( methodOverride() );
 
-app.configure( 'prod', function() {
-	console.log( 'Running '+ pkg.name +' in production mode' );
-});
+app.use( bodyParser.urlencoded({ extended: true }) );
 
-// configuring routes here. edit inside ./controllers/main.js to add routes
-mainController( app );
+app.use( '/', routes.index );
 
-// using router middleware
-app.use( app.router );
+app.use( '*', routes.errors.error404 );
+
+app.use( routes.errors.coverall );
 
 function start() {
 	http.createServer( app ).listen( app.get( 'port' ) );

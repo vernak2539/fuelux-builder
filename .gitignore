@@ -5,6 +5,7 @@
 /optimized
 /coverage
 jshint.xml
+/bower_components
 
 #############################
 # Node.js
