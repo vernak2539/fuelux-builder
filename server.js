@@ -20,6 +20,8 @@ var ectRenderer = ECT({
 	, ext : '.ect'
 });
 
+var routes = require( './routes/main' );
+
 var lessCompiler = require( 'express-less-middleware' )();
 
 app.use( compression() );
@@ -50,6 +52,12 @@ app.use( express.static( __dirname + config.ui.publicDir ) );
 app.use( methodOverride() );
 
 app.use( bodyParser.urlencoded({ extended: true }) );
+
+app.use( '/', routes.index );
+
+app.use( '*', routes.errors.error404 );
+
+app.use( routes.errors.coverall );
 
 function start() {
 	http.createServer( app ).listen( app.get( 'port' ) );
