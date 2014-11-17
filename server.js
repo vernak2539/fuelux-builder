@@ -37,7 +37,7 @@ app.disable( 'X-Powered-By' );
 if( process.env.NODE_ENV === 'dev' ) {
 
 	// using less compiler
-	app.use( lessCompiler() );
+	app.use( lessCompiler );
 
 	// error handling dump, only in dev
 	app.use( errorHandler( { dumpException: true, showStack: true } ) );
